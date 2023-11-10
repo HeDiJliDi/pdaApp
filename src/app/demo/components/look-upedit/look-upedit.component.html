@@ -1,0 +1,118 @@
+<div class="p-inputgroup">
+    <span class="p-float-label">
+    <p-autoComplete
+        [(ngModel)]="article.codeFamilleArticle"
+        [suggestions]="filteredItems"
+        (completeMethod)="searchItems($event,source)"
+        field="name"
+        (onBlur)="validateInput()"
+        [dropdown]="true"
+        (onSelect)="emitUpdatedArticle(source)">
+        <ng-template let-item pTemplate="item">
+            <div class="dropdown-item">
+            <table>
+                <tbody>
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" >
+            <div class="dropdown-header" style="position: absolute;z-index: 1;width: 100%;background-color: white;padding: 0.75rem 1.25rem; padding-right: 2.25rem;" >
+            <table style="height: 25px;" >
+                <thead >
+                <tr >
+                    <th>Id</th>
+                    <th>Nom</th>
+                </tr>
+                </thead>
+            </table>
+            </div>
+            <br>
+        </ng-template>
+
+        </p-autoComplete>
+        <i class="pi pi-search clickable-icon" (click)="showDetails(source)"></i>
+
+        <label for="famille">{{label}}</label>
+
+    </span>
+</div>
+<p-dialog [(visible)]="displayDialogFamille||displayDialogSousFamilleArticle" [modal]="true" [responsive]="true" [breakpoint]="1024" [style]="{width: '550px',height:'550px'}"  >
+    <ng-template pTemplate="header">
+
+    <div class="d-flex justify-content-center">
+        <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text footer enregistrer-button"  (click)="newItem()" ></button>
+        <span style="width: 20px;"></span>
+        <button pButton pRipple label="Modifier" icon="pi pi-pencil" class="p-button-text footer annuler-button"(click)="updateItem()" [disabled]="true" ></button>
+     </div>
+     </ng-template>
+     <h2>Liste des {{title}}:</h2>
+    <span class="p-input-icon-left ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+        pInputText
+        type="text"
+        [(ngModel)]="searchTerm"
+        (keyup)="filterItems()"
+        placeholder="Search Keyword"
+        class="w-full"
+        />
+    </span>
+
+
+
+
+    <table style="padding: 10px;">
+        <thead>
+            <tr>
+                <th style="padding: 15px;">ID</th>
+                <th style="padding: 15px;">Nom</th>
+            </tr>
+        </thead>
+    </table>
+    <p-listbox [options]="filteredItems"
+    [(ngModel)]="article.codeFamilleArticle"
+    (onClick)="handleSingleClickFournisseur(article.codeFamilleArticle,source)"
+    (onDblclick)="handleDoubleClickFournisseur()">
+        <ng-template let-item pTemplate="item">
+            <table style="width: 100%;">
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                </tr>
+            </table>
+        </ng-template>
+    </p-listbox>
+
+    </p-dialog>
+
+
+    <p-dialog [(visible)]="AddModifyFournisseurDialog"   [style]="{width: '500px' }" [maximizable]="true" label="Show" [modal]="true" class="p-fluid" header="Article">
+        <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 m-0" style="align-items: center;">
+                    <div  style="display: block;">
+                    <label for="description">ID</label>
+                    <input [disabled]="isEditing" pInputText style="height: 44px;" type="text" [(ngModel)]="newCar.id">
+
+                    </div>
+                    <div  style="display: block;">
+                    <label for="description">{{title}}</label>
+                    <input  pInputText style="height: 44px;" type="text" [(ngModel)]="newCar.name">
+                    </div>
+                </div>
+
+        </div>
+
+
+    <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text footer annuler-button" (click)="cancel()" ></button>
+                    <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text footer enregistrer-button" (click)="saveCar()" ></button>
+
+
+    </ng-template>
+</p-dialog>

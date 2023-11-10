@@ -1,0 +1,283 @@
+
+
+/* Reduce the size of <th> elements */
+th {
+    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    height: fit-content;
+    width: fit-content;
+  }
+
+  /* Reduce the size of <td> elements */
+  td {
+    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    height: fit-content;
+    width: fit-content;
+  }
+
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+  .custom-multi-select ::ng-deep .p-multiselect-token {
+      max-width: 80px; /* Adjust the width as per your requirement */
+      white-space: nowrap; /* Prevents the text from wrapping */
+      overflow: hidden; /* Hides the text that overflows the chip */
+      text-overflow: ellipsis; /* Displays an ellipsis when text is truncated */
+    }
+    ::ng-deep .dropdown-item {
+      display: flex;
+      align-items: center;
+      }
+      .dropdown-item {
+          display: flex;
+          align-items: center;
+          }
+          .dropdown-item {
+          display: flex;
+          align-items: center;
+          }
+
+          table {
+          width: 100%;
+          border-collapse: collapse;
+          }
+          th{
+          text-align: left;
+          }
+
+          td {
+          border-bottom: 1px solid #ddd;
+          text-align: left;
+          }
+
+          th:first-child,
+          td:first-child {
+          padding-left: 0;
+          }
+
+          th:last-child,
+          td:last-child {
+          padding-right: 0;
+          text-align: right;
+          }
+
+          ::ng-deep   mat-tab-group{
+            overflow: hidden;
+          }
+
+  /* Adjust margin and padding to minimize space between form fields */
+  .field {
+      margin-bottom: 10px; /* You can adjust this value as per your preference */
+    }
+    .table-container {
+        max-height: 300px; /* Par exemple, pour limiter la hauteur maximale */
+        overflow-y: auto; /* Pour ajouter une barre de défilement si nécessaire */
+    }
+    // ::ng-deep  .p-dialog .p-dialog-footer {
+    //     border-top: 0 none;
+    //     background: #ffffff;
+    //     color: #495057;
+    //     padding: 0 1.5rem 1.5rem 1.5rem;
+    //     text-align: left;
+    //     border-bottom-right-radius: 6px;
+    //     border-bottom-left-radius: 6px;
+    // }
+    .lookupedit-footer {
+        .p-dialog-footer {
+            border-top: 0 none;
+            background: #ffffff;
+            color: #495057;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            text-align: left;
+            border-bottom-right-radius: 6px;
+            border-bottom-left-radius: 6px;
+
+            button:last-child {
+                margin-left: auto;
+            }
+        }
+    }
+    // .footer-container {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+
+    //     .footer-buttons-right {
+    //         display: flex;
+    //         gap: 3px; /* Espace entre les boutons */
+    //     }
+    // }
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-buttons-left {
+        display: flex;
+        gap: 10px; /* Espace entre les boutons */
+    }
+
+    .footer-buttons-right {
+        display: flex;
+        gap: 10px; /* Espace entre les boutons */
+    }
+
+
+    .align-right {
+        margin-left: auto;
+    }
+    /* If needed, adjust the margin between grid columns */
+    .p-formgrid.grid .field.col {
+      margin-right: 10px; /* You can adjust this value as per your preference */
+    }
+      /* Style pour le bouton Annuler */
+
+    //  .enregistrer-button.p-button.p-button-text {
+    //     width: 50%;
+    //  }
+    //  .annuler-button.p-button.p-button-text {
+    //     width: 50%;
+    //  }
+  // my-component.scss
+  $my-autocomplete-height: 25px;
+
+  :host ::ng-deep .p-fluid .p-autocomplete-dd .p-autocomplete-input {
+    height: $my-autocomplete-height;
+  }
+  $my-dropdown-height: 25px;
+
+  :host ::ng-deep .p-autocomplete-dd .p-autocomplete-dropdown {
+    height: $my-dropdown-height;
+  //   width:10%;
+     width: 20px !important;
+      margin-left: -4px;
+
+  }
+
+
+
+  // Appliquer les styles personnalisés pour le p-fileUpload
+
+  .scrollable-container {
+    height: 200px; /* Définissez ici la hauteur souhaitée pour le conteneur */
+    overflow-y: auto; /* Cela activera le défilement vertical lorsque le contenu dépasse la hauteur définie */
+  }
+  /* Appliquer des styles pour minimiser la taille de la table */
+  :host ::ng-deep .p-datatable {
+    font-size: 12px; /* Définir la taille de la police */
+    margin: 0;
+    padding: 0;
+  }
+
+  :host ::ng-deep .p-datatable thead > tr > th,
+  :host ::ng-deep .p-datatable tbody > tr > td {
+    padding: 0.2rem 0.5rem; /* Réduire les marges et les rembourrages */
+  }
+  .btn-verif{
+    height: 5%;
+  }
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ajustez la hauteur selon vos besoins */
+    overflow: hidden;
+ }
+
+ .title-search {
+    background-color: white;
+    padding: 10px;
+    z-index: 100;
+ }
+
+ .content-container {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 10px;
+ }
+
+
+//   .scrollable-container {
+//     height: 300px; /* Définissez ici la hauteur souhaitée pour le conteneur */
+//     overflow-y: auto; /* Cela activera le défilement vertical lorsque le contenu dépasse la hauteur définie */
+//   }
+  ::ng-deep .p-fluid .p-dialog-footer .p-button {
+      width: 122px;
+      height: 35px;
+  }
+  /* mon-composant.component.scss */
+
+  ::ng-deep .multiselect-custom .p-multiselect-chip .p-multiselect-label {
+      display: flex;
+      margin-block: 2px;
+      height: 36px;
+      margin-top: 1%;
+      /* Ajoutez d'autres styles personnalisés ici */
+    }
+    ::ng-deep .p-formgrid .p-inputtext:disabled {
+      background-color: lightgray; /* Couleur d'arrière-plan pour les champs de texte désactivés */
+    }
+
+
+  /* mon-composant.component.scss */
+
+  ::ng-deep .p-fluid .p-button-icon-only {
+      // width: 3rem;
+      height: 25px;
+
+      /* display: inline-block; */
+      // border-radius: 12px;
+  }
+  ::ng-deep .multi-select {
+      margin: 0%;
+  }
+
+  ::ng-deep .p-fluid .p-inputtext{
+      width:93%;
+  }
+  /* mon-composant.component.scss */
+
+  ::ng-deep .p-inputgroup-Sec .p-inputtext,
+  ::ng-deep .p-fluid .p-inputgroup .p-inputtext,
+  ::ng-deep .p-inputgroup .p-inputwrapper,
+  ::ng-deep .p-inputgroup .p-inputwrapper > .p-component {
+    flex: 1 1 auto; /* Conserver cette déclaration */
+    width:auto;
+    /* Supprimer la déclaration width: 1%; */
+  }
+  /* mon-composant.component.scss */
+  ::ng-deep .inactif
+  {
+      margin-top: 20px;
+      margin-left: 25%;
+  }
+  .pi-search:hover {
+      cursor: pointer;
+
+    }
+    .clickable-icon {
+      margin-top: 5px;
+      margin-left: 3px;
+      font-size: 17px; /* adjust this value as needed */
+      transform: translateX(-50px);
+      color: gray;
+    }
+    ::ng-deep .clickable-icon:hover {
+      color:#661814;
+    //   font-size:20px;
+      font-weight: bold;
+      transform: translateX(-50px);
+
+    }
+
+
+
+

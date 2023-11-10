@@ -1,0 +1,157 @@
+<div id="elementToPrint">
+
+<div class="grid">
+	<div class="col-12 padnull">
+
+        <p-toast key="commandSuccess"></p-toast>
+			<p-dataView #dv [value]="products" [paginator]="false" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+                <ng-template pTemplate="header">
+					<div class="flex-container">
+                        <p-autoComplete [(ngModel)]="codeFamille"   [dropdown]="true" [suggestions]="FiltratedSortOptions" (completeMethod)=" filterOptions($event)" (ngModelChange)="familleChanged()"    field="libelle"></p-autoComplete>
+						<span class="p-input-icon-right search">
+							<i class="pi pi-search"></i>
+							<input type="search" pInputText placeholder="Search" (input)="onFilter(dv, $event)">
+						</span>
+
+					</div>
+				</ng-template>
+				<ng-template let-product pTemplate="listItem">
+					<div class="col-12">
+						<div class="flex flex-column md:flex-row align-items-left p-3 w-full">
+							<img [src]="'data:image/png;base64,' + product.logo" [alt]="product.designation" class="my-4 md:my-0  md:w-10rem shadow-2 mr-5"/>
+							<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
+								<div class="font-bold text-2xl">{{product.designation}}</div>
+								<!-- <div class="mb-2">{{product.description}}</div> -->
+								<!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false" styleClass="mb-2"></p-rating> -->
+								<div class="flex align-items-left mt-2">
+									<i class="pi pi-tag mr-2"></i>
+									<span class="font-semibold">{{codeFamille.libelle}}</span>
+								</div>
+							</div>
+							<div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+								<span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">${{product.prixVenteTtc}}</span>
+								<p-button icon="pi pi-shopping-cart" label="Add to Cart" * styleClass="mb-2 p-button-sm"></p-button>
+								<!-- <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
+							</div>
+						</div>
+					</div>
+				</ng-template>
+
+				<ng-template let-product pTemplate="gridItem">
+                    <div class="col-12 md:col-4">
+                        <div class="card m-3 border-1 surface-border" (click)="cardClick(product)"   >
+                            <!-- <p-badge *ngIf="product.isExist" value="{{product.quantiteCommander}}" severity="danger"></p-badge> -->
+                            <div class="badgenumber" *ngIf="product.isExist">{{product.quantiteCommander}}</div>
+
+                            <div class="flex flex-wrap gap-2 align-items-left justify-content-between mb-2">
+                                <div class="flex align-items-center">
+                                    <i class="pi pi-tag mr-2"></i>
+                                    <span class="font-semibold">{{codeFamille.libelle}}</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-column align-items-left text-left mb-3">
+                                <img [src]="'data:image/png;base64,' + product.logo" [alt]="product.designation"/>
+
+                                <div class="text-2xl font-bold">{{product.designation}}</div>
+                                <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                            </div>
+                            <div class="flex align-items-center justify-content-between">
+                                <span class="text-2xl font-semibold">{{product.prixVenteTtc}} TND</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+
+			</p-dataView>
+	</div>
+
+    <p-dialog [(visible)]="commandeByArticle"[style]="{width: '100vw', height: '100vh'}" [maximizable]="false"  label="Show" [modal]="true" class="p-fluid"  >
+        <div class="col-12  ">
+                <div class="flex flex-wrap gap-2 align-items-left justify-content-between mb-2">
+                    <div class="align-items-center">
+                        <i class="pi pi-tag mr-2"></i>
+                        <span class="font-semibold">{{codeFamille.libelle}}</span>
+                    </div>
+                </div>
+                <div class="flex flex-column align-items-center text-center mb-3">
+                        <img [src]="'data:image/png;base64,' + articleCommander.logo" [alt]="articleCommander.designation" class="my-4 md:my-0 md:w-10rem shadow-2  w-full"/>
+                        <div class=" align-items-center text-center mt-2">
+							<span class="p-buttonset">
+								<button pButton pRipple label="" icon="pi pi-minus" (click)="changeQte('moins')" class="plus-moins"></button>
+								<button pButton pRipple label='{{quantite}}' (click)="changeQte('plus')" disabled="true" class="plus-moins" style="font-size: 20px;font-weight: 900; font-family: Tahoma, sans-serif;  "></button>
+								<button pButton pRipple label="" icon="pi pi-plus" (click)="changeQte('plus') " class="plus-moins"></button>
+							</span>
+                       </div>
+                </div>
+                <div class="text-2xl font-bold">{{articleCommander.designation}}</div>
+                <p-rating [ngModel]="articleCommander.rating" [readonly]="true" [cancel]="false"></p-rating>
+				<div class="flex align-items-left justify-content-between">
+                    <span class=" font-bold" style="font-size:35px;" >{{articleCommander.prixVenteTtc}}&nbsp;TND</span>
+                </div>
+
+                <h6>Si vous êtes allergique ou nous devons éviter quoi
+                que ce soit laissez nous un commentaire.</h6>
+
+                <textarea rows="3" cols="35" pInputTextarea id="tel" type="text" ></textarea>
+        </div>
+        <ng-template pTemplate="footer" >
+			<div class="align-items-center">
+				<button pButton pRipple [label]="'Ajouter au panier . '+ajoutAuxPanier+'TND'" icon="pi pi-shopping-cart" class="passer-commande" (click)="AjoutauPanier()"></button>
+			</div>
+        </ng-template>
+    </p-dialog>
+
+    <div class="cart-button" (click)="panierOpen()">
+        <div>
+            <i class="pi pi-shopping-cart" pBadge style="font-size: 2rem" value={{badgePanier}}  severity="danger"></i>
+            <span>Panier</span>
+        </div>
+        <!-- <span class="badge">{{badgePanier}}</span> -->
+        <span>{{totalPanier}} TND</span>
+    </div>
+    <p-dialog [(visible)]="panierDialog" [style]="{width: '100vw', height: '100vh'}" [maximizable]="false" label="Panier" [modal]="true" class="p-fluid">
+        <div class="flex  field" style="display: flex; justify-content: space-between;">
+            <div class="p-field p-col-12 p-md-8 designation"style="font-size:18px;font-weight:800;color:#1E0547">
+               Articles
+            </div>
+
+
+                    <div class="p-field p-col-12 p-md-2 amount" style="font-size:20px;font-weight:500; font-family: Tahoma, sans-serif;color:#1E0547">
+                {{totalPanier}} TND
+            </div>
+        </div>
+		<div *ngFor="let ligneCommande of L_ligneCommande" class="cart-item field">
+                 <div class="card">
+                    <div class="flex  " style="display: flex; justify-content: space-between;">
+                        <div class="p-field p-col-12 p-md-8 designation"style="font-size:16px;font-weight:800;color:#1E0547">
+                            {{ ligneCommande.Designation }}
+                        </div>
+
+
+                                <div class="p-field p-col-12 p-md-2 amount" style="font-size:18px;font-weight:500; font-family: Tahoma, sans-serif;color:#1E0547">
+                            {{ ligneCommande.MontantTtc }} TND
+                        </div>
+                    </div>
+                    <div class="flex" style="display: flex; justify-content:right;margin-top: 5px;" >
+                        <div class="">
+                            <span class="p-buttonset">
+                                <button pButton pRipple label="" icon="pi pi-minus" (click)="changeQteLigne('moins',ligneCommande)" style="font-weight: 700;" class="plusmoins"></button>
+                                <button pButton pRipple [label]="ligneCommande.Quantite"  disabled="true" class="plusmoins" style="width: 50%;font-size: 19px;
+                                font-weight: 900;
+                                font-family: Tahoma, sans-serif; "></button>
+                                <button pButton pRipple label="" icon="pi pi-plus" (click)="changeQteLigne('plus',ligneCommande)" style="font-weight: 700;" class="plusmoins"></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+		</div>
+
+
+		<ng-template pTemplate="footer">
+			<button pButton pRipple [label]="'Passer la commande'" icon="pi pi-check" class="passer-commande" (click)="commander()" [disabled]="L_ligneCommande.length===0"></button>
+		</ng-template>
+	</p-dialog>
+
+</div>
+</div>
